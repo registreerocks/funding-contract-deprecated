@@ -1,0 +1,15 @@
+{
+  "name": "IdContracts",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "coverage": "./node_modules/.bin/solidity-coverage"
+  },
+  "dependencies": {
+    "openzeppelin-solidity": "^1.12.0",
+    "truffle-test-utils": "^0.1.0"
+  },
+  "devDependencies": {
+    "solidity-coverage": "^0.5.11"
+  }
+}
