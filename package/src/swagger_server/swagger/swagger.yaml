@@ -1,0 +1,125 @@
+openapi: 3.0.0
+info:
+  description: ''
+  version: 0.1.0
+  title: Funding Contract API
+tags:
+  - name: Funding Contract API
+    description: ''
+paths:
+  /contract/deposit:
+    post:
+      tags:
+        - contract
+      summary: deposit funds in contract
+      description: ''
+      operationId: deposit
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Invalid input
+        '401':
+          description: Authentication error
+      x-swagger-router-controller: swagger_server.controllers.funding_contract_API_functions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Deposit'
+        description: Amount in Ether to be deposited
+        required: true
+  /contract/withdraw:
+    post:
+      tags:
+        - contract
+      summary: withdraw all funds from contract
+      description: ''
+      operationId: withdraw
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Invalid input
+        '401':
+          description: Authentication error
+      x-swagger-router-controller: swagger_server.controllers.funding_contract_API_functions
+  /contract/fund:
+    post:
+      tags:
+        - contract
+      summary: fund an address
+      description: ''
+      operationId: fund
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Invalid input
+        '401':
+          description: Authentication error
+      x-swagger-router-controller: swagger_server.controllers.funding_contract_API_functions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Fund'
+        description: Address to be funded
+        required: true
+  /contract/balance:
+    get:
+      tags:
+        - contract
+      summary: get funding contract balance
+      description: ''
+      operationId: get_balance
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Authentication error
+      x-swagger-router-controller: swagger_server.controllers.funding_contract_API_functions
+  /contract/cooldown:
+    get:
+      tags:
+        - contract
+      summary: get cooldown termination time
+      description: ''
+      operationId: get_cooldown
+      parameters:
+        - in: query
+          name: address
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Authentication error
+      x-swagger-router-controller: swagger_server.controllers.funding_contract_API_functions
+servers:
+  - url: 'http://localhost:8000/v0.1'
+components:
+  schemas:
+    Deposit:
+      type: object
+      properties:
+        amount:
+          type: integer
+      xml:
+        name: Deposit
+    Fund:
+      type: object
+      properties:
+        address:
+          type: string
+      xml:
+        name: Fund
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []
